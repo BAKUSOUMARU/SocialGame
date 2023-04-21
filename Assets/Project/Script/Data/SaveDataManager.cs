@@ -6,11 +6,12 @@ public class SaveDataManager : SingletonMonoBehaviour<SaveDataManager>
 {
     public UserData userData = new UserData();
 
-    private async void Start()
+    protected override async void Awake()
     {
+        base.Awake();
         await LoadDataAsync();
     }
-
+    
     public async Task SaveDataAsync()
     {
         await JsonSaveLoad.SaveDataAsync(userData);
@@ -30,5 +31,12 @@ public class SaveDataManager : SingletonMonoBehaviour<SaveDataManager>
             Debug.Log("新規セーブデータ作成");
             await SaveDataAsync();
         }
+    }
+
+    public async Task ResetDataAsync()
+    {
+        userData = new UserData();
+        Debug.Log("セーブデータをリセットしました");
+        await SaveDataAsync();
     }
 }
