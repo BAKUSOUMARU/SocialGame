@@ -1,6 +1,6 @@
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
-using save; // JsonSaveLoadを含む名前空間を追加
+using Save; // JsonSaveLoadを含む名前空間を追加
 
 public class SaveDataManager : SingletonMonoBehaviour<SaveDataManager>
 {
@@ -12,12 +12,12 @@ public class SaveDataManager : SingletonMonoBehaviour<SaveDataManager>
         await LoadDataAsync();
     }
     
-    public async Task SaveDataAsync()
+    public async UniTask SaveDataAsync()
     {
         await JsonSaveLoad.SaveDataAsync(userData);
     }
 
-    public async Task LoadDataAsync()
+    public async UniTask LoadDataAsync()
     {
         UserData loadedData = await JsonSaveLoad.LoadDataAsync();
 
@@ -33,7 +33,7 @@ public class SaveDataManager : SingletonMonoBehaviour<SaveDataManager>
         }
     }
 
-    public async Task ResetDataAsync()
+    public async UniTask ResetDataAsync()
     {
         userData = new UserData();
         Debug.Log("セーブデータをリセットしました");

@@ -1,14 +1,14 @@
 using System.IO;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace save
+namespace Save
 {
     public static class JsonSaveLoad
     {
         private static readonly string saveFilePath = Path.Combine(Application.persistentDataPath, "save.json");
 
-        public static async Task SaveDataAsync(UserData userData)
+        public static async UniTask SaveDataAsync(UserData userData)
         {
             string json = JsonUtility.ToJson(userData);
             using (StreamWriter writer = new StreamWriter(saveFilePath))
@@ -17,7 +17,7 @@ namespace save
             }
         }
 
-        public static async Task<UserData> LoadDataAsync()
+        public static async UniTask<UserData> LoadDataAsync()
         {
             if (!File.Exists(saveFilePath))
             {

@@ -1,12 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
-using save;
 using Random = UnityEngine.Random;
 
 public class PlayFabLogin : MonoBehaviour
@@ -41,7 +36,7 @@ public class PlayFabLogin : MonoBehaviour
         
     }
 
-    async Task Login()
+    async UniTask Login()
     {
         bool isAccountCreate = TestForNullOrEmpty(SaveDataManager.Instance.userData.id);
         PlayFabClientAPI.LoginWithCustomID(
@@ -62,7 +57,7 @@ public class PlayFabLogin : MonoBehaviour
         );
     }
 
-    public async Task CheckAccountExistence(string customId)
+    public async UniTask CheckAccountExistence(string customId)
     {
         var request = new LoginWithCustomIDRequest
         {
