@@ -4,32 +4,23 @@ using PlayFab.ClientModels;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PlayFabLogin : MonoBehaviour
+public class PlayFabcustomidLogin : MonoBehaviour
 {
     private string _id;
-
-    void  Start()
-    {
-              
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
+    bool isAccountCreate;
+    
     public async void Set()
     {
         if (TestForNullOrEmpty(SaveDataManager.Instance.userData.id))
         {
+            isAccountCreate = true;
             _id = CreateID().ToString();
             await CheckAccountExistence(_id);
             
         }
         else
         {
+            isAccountCreate = false;
             _id = SaveDataManager.Instance.userData.id;
             await Login();
         }
@@ -38,10 +29,7 @@ public class PlayFabLogin : MonoBehaviour
 
     async UniTask Login()
     {
-        bool isAccountCreate = TestForNullOrEmpty(SaveDataManager.Instance.userData.id);
         PlayFabClientAPI.LoginWithCustomID(
-
-            
             new LoginWithCustomIDRequest {
                 CustomId = _id, 
                 CreateAccount = isAccountCreate, 
@@ -64,29 +52,23 @@ public class PlayFabLogin : MonoBehaviour
             CustomId = customId,
             CreateAccount = false,
         };
-
         PlayFabClientAPI.LoginWithCustomID(request, OnAccountExistenceCheckSuccess, OnAccountExistenceCheckFailure);
     }
 
-    private void OnAccountExistenceCheckSuccess(LoginResult result)
+    
+    private async void OnAccountExistenceCheckSuccess(LoginResult result)
     {
         //アカウントが存在する場合の処理を書く
         _id = CreateID().ToString();
-        CheckAccountExistence(_id);
-    }
+        await CheckAccountExistence(_id);
 
+    }
     private async void OnAccountExistenceCheckFailure(PlayFabError error)
     {
         SaveDataManager.Instance.userData.id = _id;
         await SaveDataManager.Instance.SaveDataAsync();
-        Login();
-    }
-
-    
-    
-    void CreateAccount()
-    {
-        int ID = CreateID();
+        await Login();
+        Debug.Log("Check完了");
     }
     
      int CreateID()
