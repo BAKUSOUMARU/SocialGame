@@ -5,4 +5,5 @@ public class UserData
     public string email;
     public string password;
     public string accountName;
+    public string playFabId;
 }
