@@ -29,7 +29,6 @@ public class PlayFabcustomidLogin : MonoBehaviour
             _isAccountCreate = true;
             _id = CreateID().ToString();
             await CheckAccountExistence(_id);
-            
         }
         else
         {
@@ -135,5 +134,4 @@ public class PlayFabcustomidLogin : MonoBehaviour
      {
          Debug.LogError("Failed to get custom ID: " + error.ErrorMessage);
      }
-     
 }
