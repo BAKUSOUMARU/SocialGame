@@ -513,6 +513,7 @@ MonoBehaviour:
     email: 
     password: 
     accountName: 
+    playFabId: 
 --- !u!4 &203614025
 Transform:
   m_ObjectHideFlags: 0

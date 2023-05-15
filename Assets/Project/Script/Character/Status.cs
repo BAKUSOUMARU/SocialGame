@@ -6,6 +6,9 @@ public class Status
 {
     [SerializeField] private string _name;
     public string Name => _name;
+
+    [SerializeField] private int _level;
+    public int Level => _level;
     
     [SerializeField] private int _maxHp;
     public int Hp { get; set; }
@@ -18,6 +21,7 @@ public class Status
 
     [SerializeField] private int _lucky;
     public int Lucky => _lucky;
+    
 
     public void Initialize()
     {
@@ -29,9 +33,10 @@ public class Status
         return Hp <= 0;
     }
 
-    public void Set(int maxhp, int atk, int speed, int lucky, string name = "Enemy")
+    public void Set(int level, int maxhp, int atk, int speed, int lucky, string name = "Enemy")
     {
         _name = name;
+        _level = level;
         _maxHp = maxhp;
         _atk = atk;
         _speed = speed;
