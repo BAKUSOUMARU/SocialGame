@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6370f22db72b02544a241515782053a5, type: 3}
+  m_Name: CharacterData
+  m_EditorClassIdentifier: 
+  CharacterDatasList:
+  - _status:
+      _name: reimu
+      _maxHp: 100
+      _atk: 20
+      _speed: 10
+      _lucky: 20
+    _characterSprite: {fileID: 21300000, guid: ec797dbe26763d046a18a708a08e51a5, type: 3}
+  - _status:
+      _name: marisa
+      _maxHp: 80
+      _atk: 40
+      _speed: 15
+      _lucky: 20
+    _characterSprite: {fileID: 21300000, guid: c385d2427ccca1a4e8e5ed92988e8469, type: 3}
