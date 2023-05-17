@@ -36,8 +36,9 @@ public class PlayFabManager : MonoBehaviour
         PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
     }
 
-    private void OnLoginSuccess(LoginResult result)
+    private async void OnLoginSuccess(LoginResult result)
     {
+        //await CharacterManager.Instance.UpdateUserDate();
         Debug.Log("Successfully connected to PlayFab!");
     }
 

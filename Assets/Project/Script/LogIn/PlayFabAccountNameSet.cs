@@ -21,10 +21,11 @@ public class PlayFabAccountNameSet : MonoBehaviour
         PlayFabClientAPI.UpdateUserTitleDisplayName(
             new UpdateUserTitleDisplayNameRequest {
                 DisplayName = accountName
-            },
-            result =>
+            }, async result =>
             {
                 _accountNameErrorText.text = "アカウントの名前が正常に登録できました";
+                await CharacterManager.Instance.UpdateUserDate();
+                await CharacterManager.Instance.GetUserData();
                 SceneChanger.ChangeScene(sceneChangeName);
             },
             error => {

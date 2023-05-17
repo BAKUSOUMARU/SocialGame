@@ -54,8 +54,10 @@ public class PlayFabcustomidLogin : MonoBehaviour
                     UiUP();
                     return;
                 }
-                SceneChanger.ChangeScene(sceneChangeName);
+
                 _text.text = "すでにアカウントが作られているためログインが完了しました";
+                await CharacterManager.Instance.GetUserData();
+                SceneChanger.ChangeScene(sceneChangeName);
             },
             error => {
                 // 失敗時の処理

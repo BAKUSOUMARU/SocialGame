@@ -7,13 +7,14 @@ using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterManager : MonoBehaviour
+public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
 {
-    private GetCharacterFile _getCharacterFile;
+    public GetCharacterFile _getCharacterFile;
     
-    [SerializeField] private Image _image;
+    //[SerializeField] private Image _image;
 
-    public List<Character> _getCharacters; 
+   
+    public List<Character> _getCharacters = new List<Character>(); 
     
     public CharacterDataAsset _characterDataAsset;
 
@@ -30,14 +31,14 @@ public class CharacterManager : MonoBehaviour
         //
         // Debug.Log(_characterDataAsset.CharacterDatasList[0]._status.Name);
         
-        GetUserData();
+        //GetUserData();
         //UpdateUserDate();
     }
     
     /// <summary>
     /// ユーザー(プレイヤー)データの取得
     /// </summary>
-    public void GetUserData() {
+    public async UniTask GetUserData() {
         //GetUserDataRequestのインスタンスを生成
         var request = new GetUserDataRequest();
 
@@ -68,7 +69,7 @@ public class CharacterManager : MonoBehaviour
         Debug.LogWarning($"ユーザー(プレイヤー)データの取得に失敗しました : {error.GenerateErrorReport()}");
     }
 
-    public void UpdateUserDate()
+    public async UniTask UpdateUserDate()
     {
         string json = JsonUtility.ToJson(_getCharacterFile, true);
         Debug.Log(json);

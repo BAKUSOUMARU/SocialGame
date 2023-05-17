@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class Character : IBattler
 {
     [SerializeField]
     private Status _status = new Status();
 
+    [SerializeField]
     private Sprite _characterSprite;
     public Status Status => _status;
 
