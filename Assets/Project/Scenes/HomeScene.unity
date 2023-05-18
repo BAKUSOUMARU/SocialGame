@@ -297,7 +297,7 @@ RectTransform:
   m_AnchoredPosition: {x: 1.443499, y: 14.069325}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &748359751
+--- !u!1 &645560135
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -305,42 +305,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 748359753}
-  - component: {fileID: 748359752}
+  - component: {fileID: 645560137}
+  - component: {fileID: 645560136}
   m_Layer: 0
-  m_Name: CharacterManager
+  m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &748359752
+--- !u!114 &645560136
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 748359751}
+  m_GameObject: {fileID: 645560135}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c0252c3c8183d14095b689778502436, type: 3}
+  m_Script: {fileID: 11500000, guid: 60d6da184812873499ab8c39edeca8bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _getCharacterFile:
-    input_File:
-    - GetCharacterName: reimu
-      CharacterLevel: 0
   _image: {fileID: 1718481109}
-  _characterDataAsset: {fileID: 11400000, guid: d4b776422759c7540ab9cdc3e84311ac, type: 2}
---- !u!4 &748359753
+--- !u!4 &645560137
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 748359751}
+  m_GameObject: {fileID: 645560135}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 292.86362, y: 607.1798, z: 0.35078335}
+  m_LocalPosition: {x: 41.266922, y: -31.417238, z: -0.78282666}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

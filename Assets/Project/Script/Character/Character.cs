@@ -11,6 +11,9 @@ public class Character : IBattler
 
     [SerializeField]
     private Sprite _characterSprite;
+
+    public Sprite CharacterSprite => _characterSprite;
+    
     public Status Status => _status;
 
     private void Awake()

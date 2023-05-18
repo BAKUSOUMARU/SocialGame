@@ -11,16 +11,13 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
 {
     public GetCharacterFile _getCharacterFile;
     
-    //[SerializeField] private Image _image;
+    [SerializeField] private Image _image;
 
-   
     public List<Character> _getCharacters = new List<Character>(); 
     
     public CharacterDataAsset _characterDataAsset;
 
     private Sprite Test;
-    
-    
     
     
     private void Start()
@@ -34,7 +31,13 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
         //GetUserData();
         //UpdateUserDate();
     }
-    
+
+
+    #region PlayFab
+
+    #region GetUderData
+
+    private bool GetData = false;
     /// <summary>
     /// ユーザー(プレイヤー)データの取得
     /// </summary>
@@ -43,7 +46,9 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
         var request = new GetUserDataRequest();
 
         //ユーザー(プレイヤー)データの取得
+        await UniTask.WhenAll();
         PlayFabClientAPI.GetUserData(request, OnSuccessGettingPlayerData, OnErrorGettingPlayerData);
+        await UniTask.WaitUntil(() => GetData, cancellationToken: this.GetCancellationTokenOnDestroy());
         Debug.Log($"プレイヤー(ユーザー)データの取得開始");
     }
       
@@ -59,16 +64,19 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
         var  value = result.Data["Character"].Value;
         _getCharacterFile = JsonUtility.FromJson<GetCharacterFile>(value);
         await GetCharactersSetr();
-        
+        GetData = true;
         Debug.Log("完了");
         //Debug.Log(_getCharacterFile.input_File[0].GetCharacterName);
     }
-
+    
     //ユーザー(プレイヤー)データの取得に失敗
     private void OnErrorGettingPlayerData(PlayFabError error) {
         Debug.LogWarning($"ユーザー(プレイヤー)データの取得に失敗しました : {error.GenerateErrorReport()}");
     }
 
+    #endregion
+
+    #region UpdateUserData
     public async UniTask UpdateUserDate()
     {
         string json = JsonUtility.ToJson(_getCharacterFile, true);
@@ -97,9 +105,16 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
         Debug.Log($"ユーザー(プレイヤー)データの更新に成功しました");
         
     }
+    
+
+    #endregion
+    
+    #endregion
 
 
-    async UniTask GetCharactersSetr()
+    #region Private Methods
+
+    private async UniTask GetCharactersSetr()
     {
         foreach (var getChatacterData in _getCharacterFile.input_File)
         {
@@ -108,17 +123,19 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
             var character = new Character();
             
             character.Set(
-                        Data._characterSprite,
-                        Data._status.Name,
-                        getChatacterData.CharacterLevel,
-                        Data._status.Hp,
-                        Data._status.Atk,
-                        Data._status.Speed,
-                        Data._status.Lucky);
+                Data._characterSprite,
+                Data._status.Name,
+                getChatacterData.CharacterLevel,
+                Data._status.Hp,
+                Data._status.Atk,
+                Data._status.Speed,
+                Data._status.Lucky);
             
             _getCharacters.Add(character);
         }
     }
+    #endregion
+    
 }
 
 
