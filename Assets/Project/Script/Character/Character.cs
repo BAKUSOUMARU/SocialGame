@@ -16,10 +16,12 @@ public class Character : IBattler
     
     public Status Status => _status;
 
-    private void Awake()
+    public Character(Sprite characterSprite,string name,int level, int hp, int atk,int speed, int lucky )
     {
+        this._characterSprite = characterSprite;
+        this._status.Set(level,hp,atk,speed,lucky,name);
     }
-
+    
     void IBattler.Dead()
     {
         //Destroy(gameObject);
@@ -28,11 +30,5 @@ public class Character : IBattler
     public void Initialize()
     {
         Status.Initialize();
-    }
-
-    public void Set(Sprite characterSprite,string name,int level, int hp, int atk,int speed, int lucky )
-    {
-        _characterSprite = characterSprite;
-        _status.Set(level,hp,atk,speed,lucky,name);
     }
 }

@@ -11,6 +11,7 @@ public class Status
     public int Level => _level;
     
     [SerializeField] private int _maxHp;
+    public int MaxHP => _maxHp;
     public int Hp { get; set; }
 
     [SerializeField] private int _atk;

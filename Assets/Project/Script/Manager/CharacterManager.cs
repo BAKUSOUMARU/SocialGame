@@ -49,7 +49,8 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
         await UniTask.WhenAll();
         PlayFabClientAPI.GetUserData(request, OnSuccessGettingPlayerData, OnErrorGettingPlayerData);
         await UniTask.WaitUntil(() => GetData, cancellationToken: this.GetCancellationTokenOnDestroy());
-        Debug.Log($"プレイヤー(ユーザー)データの取得開始");
+        Debug.Log($"プレイヤー(ユーザー)データの取得完了");
+        GetData = false;
     }
       
     //=================================================================================
@@ -77,6 +78,7 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
     #endregion
 
     #region UpdateUserData
+    
     public async UniTask UpdateUserDate()
     {
         string json = JsonUtility.ToJson(_getCharacterFile, true);
@@ -92,18 +94,20 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
         };
         
         PlayFabClientAPI.UpdateUserData(request, OnSuccessUpdatingPlayerData, OnErrorUpdatingPlayerData);
-        Debug.Log($"プレイヤー(ユーザー)データの更新開始");
+        await UniTask.WaitUntil(() => GetData, cancellationToken: this.GetCancellationTokenOnDestroy());
+        Debug.Log($"通った");
+        GetData = false;
     }
 
-    private void OnErrorUpdatingPlayerData(PlayFabError obj)
+    private void OnErrorUpdatingPlayerData(PlayFabError obj　)
     {
         Debug.LogWarning($"ユーザー(プレイヤー)データの更新に失敗しました");
     }
 
     private void OnSuccessUpdatingPlayerData(UpdateUserDataResult obj)
     {
+        GetData = true;
         Debug.Log($"ユーザー(プレイヤー)データの更新に成功しました");
-        
     }
     
 
@@ -112,7 +116,7 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
     #endregion
 
 
-    #region Private Methods
+    #region PrivateMethods
 
     private async UniTask GetCharactersSetr()
     {
@@ -120,29 +124,39 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
         {
             var Data =_characterDataAsset.CharacterDatasList.Find(X => X._status.Name == getChatacterData.GetCharacterName);
 
-            var character = new Character();
-            
-            character.Set(
-                Data._characterSprite,
-                Data._status.Name,
-                getChatacterData.CharacterLevel,
-                Data._status.Hp,
-                Data._status.Atk,
-                Data._status.Speed,
-                Data._status.Lucky);
+            var character = new Character(
+                                Data._characterSprite,
+                                Data._status.Name,
+                                getChatacterData.CharacterLevel,
+                                Data._status.MaxHP,
+                                Data._status.Atk,
+                                Data._status.Speed,
+                                Data._status.Lucky);
             
             _getCharacters.Add(character);
         }
     }
     #endregion
+
+    #region PublicMethods
+
+    public void AddGetCharacter(Character getCharacter)
+    {
+        _getCharacters.Add(getCharacter);
+        var data = new GetChatacter(getCharacter.Status.Name,getCharacter.Status.Level);
+        _getCharacterFile.input_File.Add(data);
+    }
+    
+    #endregion
     
 }
 
+#region Data
 
 [Serializable]
 public class GetCharacterFile
 {
-    public GetChatacter[] input_File;
+    public List<GetChatacter> input_File;
 }
 
 [Serializable]
@@ -151,4 +165,11 @@ public class GetChatacter
     public string GetCharacterName;
 
     public int CharacterLevel;
+
+    public GetChatacter(string name, int level)
+    {
+        this.GetCharacterName = name;
+        this.CharacterLevel = level;
+    }
 }
+#endregion
