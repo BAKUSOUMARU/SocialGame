@@ -9,7 +9,7 @@ public class CharacterUiImage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _image.sprite = CharacterManager.Instance._getCharacters[1].CharacterSprite;
+        _image.sprite = CharacterManager.Instance._getCharacters[0].CharacterSprite;
     }
 
     // Update is called once per frame

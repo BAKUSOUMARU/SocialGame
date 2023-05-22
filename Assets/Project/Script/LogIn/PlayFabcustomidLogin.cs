@@ -10,6 +10,9 @@ using Random = UnityEngine.Random;
 
 public class PlayFabcustomidLogin : MonoBehaviour
 {
+    [SerializeField] 
+    private GameObject _loginUI;
+    
     [SerializeField]
     private GameObject _accountnameSetUI;
 
@@ -110,7 +113,7 @@ public class PlayFabcustomidLogin : MonoBehaviour
      void UiUP()
      {
          _accountnameSetUI.SetActive(true);
-         this.gameObject.SetActive(false);
+         _loginUI.gameObject.SetActive(false);
      }
      
      /// <summary>

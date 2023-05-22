@@ -37,7 +37,7 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
 
     #region GetUderData
 
-    private bool GetData = false;
+    private bool _getData = false;
     /// <summary>
     /// ユーザー(プレイヤー)データの取得
     /// </summary>
@@ -48,9 +48,9 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
         //ユーザー(プレイヤー)データの取得
         await UniTask.WhenAll();
         PlayFabClientAPI.GetUserData(request, OnSuccessGettingPlayerData, OnErrorGettingPlayerData);
-        await UniTask.WaitUntil(() => GetData, cancellationToken: this.GetCancellationTokenOnDestroy());
+        await UniTask.WaitUntil(() => _getData, cancellationToken: this.GetCancellationTokenOnDestroy());
         Debug.Log($"プレイヤー(ユーザー)データの取得完了");
-        GetData = false;
+        _getData = false;
     }
       
     //=================================================================================
@@ -65,7 +65,7 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
         var  value = result.Data["Character"].Value;
         _getCharacterFile = JsonUtility.FromJson<GetCharacterFile>(value);
         await GetCharactersSetr();
-        GetData = true;
+        _getData = true;
         Debug.Log("完了");
         //Debug.Log(_getCharacterFile.input_File[0].GetCharacterName);
     }
@@ -94,9 +94,9 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
         };
         
         PlayFabClientAPI.UpdateUserData(request, OnSuccessUpdatingPlayerData, OnErrorUpdatingPlayerData);
-        await UniTask.WaitUntil(() => GetData, cancellationToken: this.GetCancellationTokenOnDestroy());
+        await UniTask.WaitUntil(() => _getData, cancellationToken: this.GetCancellationTokenOnDestroy());
         Debug.Log($"通った");
-        GetData = false;
+        _getData = false;
     }
 
     private void OnErrorUpdatingPlayerData(PlayFabError obj　)
@@ -106,7 +106,7 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
 
     private void OnSuccessUpdatingPlayerData(UpdateUserDataResult obj)
     {
-        GetData = true;
+        _getData = true;
         Debug.Log($"ユーザー(プレイヤー)データの更新に成功しました");
     }
     
