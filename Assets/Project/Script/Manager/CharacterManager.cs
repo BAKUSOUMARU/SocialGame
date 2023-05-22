@@ -11,7 +11,7 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
 {
     public GetCharacterFile _getCharacterFile;
     
-    [SerializeField] private Image _image;
+    //[SerializeField] private Image _image;
 
     public List<Character> _getCharacters = new List<Character>(); 
     

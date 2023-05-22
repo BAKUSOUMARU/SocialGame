@@ -30,5 +30,27 @@ namespace Save
                 return JsonUtility.FromJson<UserData>(json);
             }
         }
+        
+        public  static void Save(UserData userData)
+        {
+            string json = JsonUtility.ToJson(userData);
+            using (StreamWriter writer = new StreamWriter(saveFilePath))
+            {
+                 writer.WriteAsync(json);
+            }
+        }
+        
+        public static UserData LoadData()
+        {
+            if (!File.Exists(saveFilePath))
+            {
+                return null;
+            }
+            using (StreamReader reader = new StreamReader(saveFilePath))
+            {
+                string json =  reader.ReadToEnd();
+                return JsonUtility.FromJson<UserData>(json);
+            }
+        }
     }
 }

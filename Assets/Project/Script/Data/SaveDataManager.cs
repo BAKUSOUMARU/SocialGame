@@ -39,4 +39,32 @@ public class SaveDataManager : SingletonMonoBehaviour<SaveDataManager>
         Debug.Log("セーブデータをリセットしました");
         await SaveDataAsync();
     }
+
+    public void Save()
+    {
+         JsonSaveLoad.Save(userData);
+    }
+
+    public void RestSaveData()
+    {
+        userData = new UserData();
+        Debug.Log("セーブデータをリセットしました");
+        Save();
+    }
+
+    public void Lood()
+    {
+        UserData loadedData =  JsonSaveLoad.LoadData();
+
+        if (loadedData != null)
+        {
+            userData = loadedData;
+            Debug.Log("ロード完了");
+        }
+        else
+        {
+            Debug.Log("新規セーブデータ作成");
+             Save();
+        }
+    }
 }
