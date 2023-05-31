@@ -3,7 +3,7 @@ using PlayFab.ClientModels;
 using TMPro;
 using UnityEngine;
 
-public class PlayFabAccountNameSet : MonoBehaviour
+public class PlayFabAccountNameSetter : MonoBehaviour
 {
     [SerializeField] private TMP_InputField _accountnameSet;
     

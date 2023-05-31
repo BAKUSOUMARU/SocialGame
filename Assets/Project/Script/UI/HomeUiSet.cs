@@ -7,13 +7,15 @@ using UnityEngine;
 public class HomeUiSet : MonoBehaviour
 {
     [SerializeField] private TMP_Text userNameText;
-    
+
     private string _userName;
+    
+    public string UserName => _userName;
+    
     // Start is called before the first frame update
-    async void Start()
+     void Start()
     {
-        await GetDisplayName();
-        userNameText.text = _userName;
+         GetDisplayName().Forget();
     }
 
     async UniTask GetDisplayName()
@@ -34,5 +36,4 @@ public class HomeUiSet : MonoBehaviour
             }
         ); 
     }
-    
 }

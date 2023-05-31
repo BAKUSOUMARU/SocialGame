@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SlideUI : MonoBehaviour
+public class SlideUI : MonoBehaviour 
 {
     public GameObject[] slideElements;  // スライドUIの要素配列
     private int currentIndex = 0;       // 現在のインデックス
@@ -11,7 +12,7 @@ public class SlideUI : MonoBehaviour
     private Vector3 touchEndPos;
 
 
-    private void FixedUpdate()
+    private void Update()
     {
         Flick();
     }
@@ -37,21 +38,17 @@ public class SlideUI : MonoBehaviour
         float directionX = touchEndPos.x - touchStartPos.x;
         float directionY = touchEndPos.y - touchStartPos.y;
         string Direction = null;
-
-        if (Mathf.Abs(directionY) < Mathf.Abs(directionX))
-        {
-            if (30 < directionX)
+        if (20 <= directionX)
             {
                 //右向きにフリック
                 Direction = "right";
             }
-            else if (-30 > directionX)
+            else if (-20 >= directionX)
             {
                 //左向きにフリック
                 Direction = "left";
             }
-        }
-        else
+            else
         {
             //タッチを検出
             Direction = "touch";
@@ -111,4 +108,6 @@ public class SlideUI : MonoBehaviour
         // 指定されたインデックスのスライド要素を表示する
         slideElements[index].SetActive(true);
     }
+
+   
 }

@@ -20,7 +20,8 @@ MonoBehaviour:
       _atk: 20
       _speed: 10
       _lucky: 20
-    _characterSprite: {fileID: 21300000, guid: ec797dbe26763d046a18a708a08e51a5, type: 3}
+    _characterSprite: {fileID: 210007217, guid: ec797dbe26763d046a18a708a08e51a5, type: 3}
+    _charactericonSprite: {fileID: 1923894399, guid: ec797dbe26763d046a18a708a08e51a5, type: 3}
   - _status:
       _name: Marisa
       _level: 1
@@ -28,7 +29,8 @@ MonoBehaviour:
       _atk: 40
       _speed: 15
       _lucky: 20
-    _characterSprite: {fileID: 21300000, guid: c385d2427ccca1a4e8e5ed92988e8469, type: 3}
+    _characterSprite: {fileID: 1618010190, guid: c385d2427ccca1a4e8e5ed92988e8469, type: 3}
+    _charactericonSprite: {fileID: -1696288966, guid: c385d2427ccca1a4e8e5ed92988e8469, type: 3}
   - _status:
       _name: Youmu
       _level: 1
@@ -36,4 +38,5 @@ MonoBehaviour:
       _atk: 40
       _speed: 15
       _lucky: 20
-    _characterSprite: {fileID: 21300000, guid: 0f6de74a0da71e944b9dfceb4e20c012, type: 3}
+    _characterSprite: {fileID: 932425896, guid: 0f6de74a0da71e944b9dfceb4e20c012, type: 3}
+    _charactericonSprite: {fileID: 1788378896, guid: 0f6de74a0da71e944b9dfceb4e20c012, type: 3}

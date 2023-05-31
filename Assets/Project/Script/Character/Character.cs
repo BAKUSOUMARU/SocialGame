@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Character : IBattler
+public class Character : IBattler,IPartyFormationable
 {
     [SerializeField]
     private Status _status = new Status();
@@ -12,13 +12,22 @@ public class Character : IBattler
     [SerializeField]
     private Sprite _characterSprite;
 
-    public Sprite CharacterSprite => _characterSprite;
+    [SerializeField] 
+    private Sprite _characterIconSprite;
     
     public Status Status => _status;
 
-    public Character(Sprite characterSprite,string name,int level, int hp, int atk,int speed, int lucky )
+    public Sprite CharacterSprite => _characterSprite;
+
+    public Sprite Icon => _characterIconSprite;
+
+    private bool isCharacter = true;
+    public bool IsCharacter => isCharacter;
+    
+    public Character(Sprite characterSprite, Sprite characterIconSprite, string name,int level, int hp, int atk,int speed, int lucky )
     {
         this._characterSprite = characterSprite;
+        this._characterIconSprite = characterIconSprite;
         this._status.Set(level,hp,atk,speed,lucky,name);
     }
     
@@ -31,4 +40,5 @@ public class Character : IBattler
     {
         Status.Initialize();
     }
+
 }

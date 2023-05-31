@@ -14,5 +14,6 @@ public class CharacterData
 {
     public Status _status = new Status();
     public Sprite _characterSprite;
+    public Sprite _charactericonSprite;
 
 }

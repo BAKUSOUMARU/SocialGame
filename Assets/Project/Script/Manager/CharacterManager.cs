@@ -126,6 +126,7 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
 
             var character = new Character(
                                 Data._characterSprite,
+                                Data._charactericonSprite,
                                 Data._status.Name,
                                 getChatacterData.CharacterLevel,
                                 Data._status.MaxHP,
