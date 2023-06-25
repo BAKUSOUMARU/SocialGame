@@ -9,6 +9,6 @@ public class PartyCharacterSelect : MonoBehaviour
 
    public void SelectActive()
    {
-      
+      Debug.Log("a");
    }
 }
