@@ -13,6 +13,8 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
     
     //[SerializeField] private Image _image;
 
+    public int CharacterID;
+
     public List<Character> _getCharacters = new List<Character>(); 
     
     public CharacterDataAsset _characterDataAsset;
@@ -63,6 +65,7 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
 
         //result.Data(Dictionary<string, UserDataRecord>)に全データが入っていて、Keyを文字列で指定すると値が取り出せる
         var  value = result.Data["Character"].Value;
+        CharacterID = int.Parse(result.Data["CharacterID"].Value);
         _getCharacterFile = JsonUtility.FromJson<GetCharacterFile>(value);
         await GetCharactersSetr();
         _getData = true;
@@ -81,11 +84,13 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
     
     public async UniTask UpdateUserDate()
     {
+        string id = CharacterID.ToString();
         string json = JsonUtility.ToJson(_getCharacterFile, true);
         Debug.Log(json);
         var updateData = new Dictionary<string, string>()
         {
-            {"Character",json}
+            {"Character",json},
+            {"CharacterID",id}
         };
         
         var request = new UpdateUserDataRequest {
@@ -125,6 +130,7 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
             var Data =_characterDataAsset.CharacterDatasList.Find(X => X._status.Name == getChatacterData.GetCharacterName);
 
             var character = new Character(
+                                CharacterID,
                                 Data._characterSprite,
                                 Data._charactericonSprite,
                                 Data._status.Name,
@@ -144,12 +150,18 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
     public void AddGetCharacter(Character getCharacter)
     {
         _getCharacters.Add(getCharacter);
-        var data = new GetChatacter(getCharacter.Status.Name,getCharacter.Status.Level);
+        var data = new GetChatacter(CharacterID,getCharacter.Status.Name,getCharacter.Status.Level);
         _getCharacterFile.input_File.Add(data);
+        CharacterID++;
     }
-    
+
+    public void CharacterIDReset()
+    {
+        CharacterID = 0;
+    }
+
     #endregion
-    
+
 }
 
 #region Data
@@ -163,12 +175,16 @@ public class GetCharacterFile
 [Serializable]
 public class GetChatacter
 {
+    public int CharacterID;
+    
     public string GetCharacterName;
 
     public int CharacterLevel;
 
-    public GetChatacter(string name, int level)
+
+    public GetChatacter(int id, string name, int level)
     {
+        this.CharacterID = id;
         this.GetCharacterName = name;
         this.CharacterLevel = level;
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PartyManager : SingletonMonoBehaviour<PartyManager>
 {
-    [SerializeField] private IPartyFormationable En;
+    public PartyEmpty EmptyPartyData;
     [SerializeField]private IPartyFormationable[] _partyList  = new IPartyFormationable[3];
     public IPartyFormationable[] PartyList => _partyList;
 
@@ -19,10 +19,15 @@ public class PartyManager : SingletonMonoBehaviour<PartyManager>
     {
         _partyList[index] = character;
     }
+    
+    public void EnptyPartySet(int index)
+    {
+        _partyList[index] = (IPartyFormationable)EmptyPartyData;
+    }
 
     public void PartyRemove(int index)
     {
-        _partyList[index] = En;
+        _partyList[index] = (IPartyFormationable)EmptyPartyData;
     }
     
     void Update()

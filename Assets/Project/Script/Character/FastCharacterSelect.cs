@@ -12,8 +12,10 @@ public class FastCharacterSelect : MonoBehaviour
     
     public async void SelectCharacter()
     {
+        CharacterManager.Instance.CharacterIDReset();
         var data =CharacterManager.Instance._characterDataAsset.CharacterDatasList.Find(X => X._status.Name == _selectCharacterName);
         var character = new Character(
+            CharacterManager.Instance.CharacterID,
             data._characterSprite,
             data._charactericonSprite,
             data._status.Name,

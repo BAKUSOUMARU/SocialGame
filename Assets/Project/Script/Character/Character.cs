@@ -6,6 +6,8 @@ using UnityEngine;
 [Serializable]
 public class Character : IBattler,IPartyFormationable
 {
+    [SerializeField] private int _characterID;
+    
     [SerializeField]
     private Status _status = new Status();
 
@@ -14,6 +16,8 @@ public class Character : IBattler,IPartyFormationable
 
     [SerializeField] 
     private Sprite _characterIconSprite;
+
+    public int CharacterID => _characterID;
     
     public Status Status => _status;
 
@@ -24,8 +28,9 @@ public class Character : IBattler,IPartyFormationable
     private bool isCharacter = true;
     public bool IsCharacter => isCharacter;
     
-    public Character(Sprite characterSprite, Sprite characterIconSprite, string name,int level, int hp, int atk,int speed, int lucky )
+    public Character(int characterid, Sprite characterSprite, Sprite characterIconSprite, string name,int level, int hp, int atk,int speed, int lucky )
     {
+        this._characterID = characterid;
         this._characterSprite = characterSprite;
         this._characterIconSprite = characterIconSprite;
         this._status.Set(level,hp,atk,speed,lucky,name);

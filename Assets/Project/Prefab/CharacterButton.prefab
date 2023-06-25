@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 211126692179275647}
   - component: {fileID: 6056597600452614018}
   - component: {fileID: 6412759308651538410}
-  - component: {fileID: 5646652557724073711}
+  - component: {fileID: 5482045598254437995}
   m_Layer: 5
   m_Name: CharacterButton
   m_TagString: Untagged
@@ -122,9 +122,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6412759308651538410}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
-        m_MethodName: Select
+      - m_Target: {fileID: 5482045598254437995}
+        m_TargetAssemblyTypeName: SetParty, Assembly-CSharp
+        m_MethodName: Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -134,7 +134,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &5646652557724073711
+--- !u!114 &5482045598254437995
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,13 +146,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbed9374541f284ea656c1e6fa2898c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _character:
-    _status:
-      _name: 
-      _level: 0
-      _maxHp: 0
-      _atk: 0
-      _speed: 0
-      _lucky: 0
-    _characterSprite: {fileID: 0}
-    _characterIconSprite: {fileID: 0}
