@@ -130,7 +130,7 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
             var Data =_characterDataAsset.CharacterDatasList.Find(X => X._status.Name == getChatacterData.GetCharacterName);
 
             var character = new Character(
-                                CharacterID,
+                                getChatacterData.CharacterID,
                                 Data._characterSprite,
                                 Data._charactericonSprite,
                                 Data._status.Name,

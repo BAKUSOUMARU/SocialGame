@@ -1,13 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SetPartyEmpty : MonoBehaviour
 {
-    private int index;
+    [SerializeField] private GameObject _gestGameObject;
     
-    public void IndexSet(int i)
+    [SerializeField]
+    private int _index;
+    
+    public void IndexSet(int i,GameObject gestGameObject)
     {
-        index = i;
+        _gestGameObject = gestGameObject;
+        _index = i;
+    }
+    public void Click()
+    {
+        _gestGameObject.SetActive(false);
+        PartyManager.Instance.PartyRemove(_index);
     }
 }

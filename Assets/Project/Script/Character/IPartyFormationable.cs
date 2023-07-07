@@ -5,6 +5,8 @@ using UnityEngine;
 
 public interface IPartyFormationable
 {
+    int Characternum { get; }
+    
     Sprite Icon { get; }
     
     bool IsCharacter{ get; }

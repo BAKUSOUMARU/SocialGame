@@ -26,6 +26,7 @@ public class FastCharacterSelect : MonoBehaviour
             data._status.Lucky);
         CharacterManager.Instance.AddGetCharacter(character);
         await CharacterManager.Instance.UpdateUserDate();
+        await PartyManager.Instance.FastPartySet();
         SceneChanger.ChangeScene("HomeScene");
     }
 }

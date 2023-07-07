@@ -7,7 +7,7 @@ using UnityEngine;
 public class Character : IBattler,IPartyFormationable
 {
     [SerializeField] private int _characterID;
-    
+
     [SerializeField]
     private Status _status = new Status();
 
@@ -17,7 +17,7 @@ public class Character : IBattler,IPartyFormationable
     [SerializeField] 
     private Sprite _characterIconSprite;
 
-    public int CharacterID => _characterID;
+    public int  Characternum => _characterID;
     
     public Status Status => _status;
 

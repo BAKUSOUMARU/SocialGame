@@ -60,6 +60,7 @@ public class PlayFabcustomidLogin : MonoBehaviour
 
                 _text.text = "すでにアカウントが作られているためログインが完了しました";
                 await CharacterManager.Instance.GetUserData();
+                await PartyManager.Instance.GetUserData();
                 SceneChanger.ChangeScene(sceneChangeName);
             },
             error => {

@@ -18,21 +18,32 @@ public class PartyButtonSetter : MonoBehaviour
 
     private List<GameObject> _buttonList  = new List<GameObject>();
 
-    public void CharacterSelectOn(int Partyindex){
+    public void GestCharacterSelectOn(int Partyindex){
         int index = 0;
-        if (_gestrootObject.activeInHierarchy)
+        _gestrootObject.SetActive(true);
+        var en = Instantiate(_emptyButton, _gestrootObject.transform);
+            en.GetComponent<SetPartyEmpty>().IndexSet(Partyindex,_gestrootObject);
+            en.GetComponent<Image>().sprite = PartyManager.Instance.EmptyPartyData.Icon;
+            _buttonList.Add(en);
+            foreach (var character in CharacterManager.Instance._getCharacters)
         {
-            var obj = Instantiate(_emptyButton, _gestrootObject.transform);
-            obj.GetComponent<SetPartyEmpty>().IndexSet(Partyindex);
-            obj.GetComponent<Image>().sprite = PartyManager.Instance.EmptyPartyData.Icon;
+            var obj = Instantiate(_partyButton, _gestrootObject.transform);
+            obj.GetComponent<SetParty>().IndexSet(Partyindex,_hostrootObject,_gestrootObject);
+            obj.GetComponent<Image>().sprite = CharacterManager.Instance._getCharacters[index].Icon;
+            obj.GetComponent<SetParty>().CharacterSet(character);
             _buttonList.Add(obj);
             index++;
         }
+    }
+    
+    public void HostCharacterSelectOn(int Partyindex){
+        int index = 0;
+        _hostrootObject.SetActive(true);
         foreach (var character in CharacterManager.Instance._getCharacters)
         {
-            var obj = Instantiate(_partyButton, _gestrootObject.transform);
-            obj.GetComponent<SetParty>().IndexSet(Partyindex);
-            obj.GetComponent<Image>().sprite = CharacterManager.Instance._getCharacters[index].CharacterSprite;
+            var obj = Instantiate(_partyButton, _hostrootObject.transform);
+            obj.GetComponent<SetParty>().IndexSet(Partyindex,_hostrootObject,_gestrootObject);
+            obj.GetComponent<Image>().sprite = CharacterManager.Instance._getCharacters[index].Icon;
             obj.GetComponent<SetParty>().CharacterSet(character);
             _buttonList.Add(obj);
             index++;

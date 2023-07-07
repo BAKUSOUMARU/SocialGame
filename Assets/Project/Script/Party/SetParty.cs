@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class SetParty : MonoBehaviour
 {
-    [SerializeField] private IPartyFormationable _character;
+    [SerializeField] private GameObject _hostList;
+    [SerializeField] private GameObject _gestList;
+    
+    private IPartyFormationable _character;
 
     private int index;
 
@@ -15,20 +18,38 @@ public class SetParty : MonoBehaviour
         _character = character;
     }
     
-    public void IndexSet(int i)
+    public void IndexSet(int i , GameObject hostlist,GameObject gestlist)
     {
+        _hostList = hostlist;
+        _gestList = gestlist;
         index = i;
     }
     public void Click()
     {
         if (IsParty)
         {
-            //PartyManager.Instance.PartyRemove(_character);
+            if (index == 0)
+            {
+                _hostList.SetActive(false);
+            }
+            else
+            {
+                _gestList.SetActive(false);
+            }
+            PartyManager.Instance.PartyRemove(index);
             IsParty = false;
         }
         else if(!IsParty)
         {
-            //PartyManager.Instance.PartySet(_character);
+            if (index == 0)
+            {
+                _hostList.SetActive(false);
+            }
+            else
+            {
+                _gestList.SetActive(false);
+            }
+            PartyManager.Instance.PartySet((Character)_character,index);
             IsParty = true;
         }
     }

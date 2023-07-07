@@ -132,15 +132,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 119024866}
-  - component: {fileID: 119024868}
-  - component: {fileID: 119024867}
   m_Layer: 5
   m_Name: Party
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &119024866
 RectTransform:
   m_ObjectHideFlags: 0
@@ -164,36 +162,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &119024867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 119024865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 612722fa165bfab4d99d7ace58142548, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EmptyPartyData:
-    _icon: {fileID: 0}
---- !u!114 &119024868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 119024865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dedea1c3e2c4b89498ebe6ecb8cb9d89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _partyButton: {fileID: 2235141646787054187, guid: 5d0543c56d144ff43a9dbfb05c0cd737, type: 3}
-  _emptyButton: {fileID: 0}
-  _gestrootObject: {fileID: 778945193}
-  _hostrootObject: {fileID: 359391919}
 --- !u!1 &346866480
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,6 +257,7 @@ GameObject:
   - component: {fileID: 359391920}
   - component: {fileID: 359391922}
   - component: {fileID: 359391921}
+  - component: {fileID: 359391923}
   m_Layer: 5
   m_Name: HostCharacterList
   m_TagString: Untagged
@@ -352,6 +321,22 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &359391923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359391919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dedea1c3e2c4b89498ebe6ecb8cb9d89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _partyButton: {fileID: 2235141646787054187, guid: 1540556e7f329304bb8636ac201eb9ab, type: 3}
+  _emptyButton: {fileID: 2235141646787054187, guid: 5d0543c56d144ff43a9dbfb05c0cd737, type: 3}
+  _gestrootObject: {fileID: 778945193}
+  _hostrootObject: {fileID: 359391919}
 --- !u!1 &429518637
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,6 +683,7 @@ GameObject:
   - component: {fileID: 778945194}
   - component: {fileID: 778945196}
   - component: {fileID: 778945195}
+  - component: {fileID: 778945197}
   m_Layer: 5
   m_Name: GestCharacterList
   m_TagString: Untagged
@@ -761,6 +747,22 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &778945197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778945193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dedea1c3e2c4b89498ebe6ecb8cb9d89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _partyButton: {fileID: 2235141646787054187, guid: 1540556e7f329304bb8636ac201eb9ab, type: 3}
+  _emptyButton: {fileID: 2235141646787054187, guid: 5d0543c56d144ff43a9dbfb05c0cd737, type: 3}
+  _gestrootObject: {fileID: 778945193}
+  _hostrootObject: {fileID: 359391919}
 --- !u!1 &929339514
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,8 +822,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -881,7 +883,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 929339516}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 359391923}
+        m_TargetAssemblyTypeName: PartyButtonSetter, Assembly-CSharp
+        m_MethodName: HostCharacterSelectOn
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1190882658
 GameObject:
   m_ObjectHideFlags: 0
@@ -1019,8 +1033,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1080,7 +1094,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1494220290}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 778945197}
+        m_TargetAssemblyTypeName: PartyButtonSetter, Assembly-CSharp
+        m_MethodName: GestCharacterSelectOn
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1510531882
 GameObject:
   m_ObjectHideFlags: 0
@@ -1275,8 +1301,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1336,7 +1362,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1593866689}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 778945197}
+        m_TargetAssemblyTypeName: PartyButtonSetter, Assembly-CSharp
+        m_MethodName: GestCharacterSelectOn
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1718481107
 GameObject:
   m_ObjectHideFlags: 0
