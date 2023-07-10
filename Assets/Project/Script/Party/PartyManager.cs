@@ -16,12 +16,6 @@ public class PartyManager : SingletonMonoBehaviour<PartyManager>
     private IPartyFormationable[] _partyList  = new IPartyFormationable[3];
     public IPartyFormationable[] PartyList => _partyList;
 
-
-    // private void Start()
-    // {
-    //     _character = En as Character;
-    // }
-
     public void PartySet(Character character ,int index)
     {
         _partyList[index] = character;
@@ -38,7 +32,7 @@ public class PartyManager : SingletonMonoBehaviour<PartyManager>
         _partyList[index] = (IPartyFormationable)EmptyPartyData;
     }
 
-    public async UniTask FastPartySet()
+    public async UniTask FarstPartySet()
     {
         _partyList[0] = (IPartyFormationable)CharacterManager.Instance._getCharacters[0];
         _partyList[1] = (IPartyFormationable)EmptyPartyData;
@@ -46,7 +40,7 @@ public class PartyManager : SingletonMonoBehaviour<PartyManager>
         Debug.Log(_partyList[0].IsCharacter);
         Debug.Log(_partyList[1].IsCharacter);
         Debug.Log(_partyList[2].IsCharacter);
-        await UpdateUserDate();
+        await UpdateUserData();
     }
     
     
@@ -84,7 +78,7 @@ public class PartyManager : SingletonMonoBehaviour<PartyManager>
         Debug.LogWarning($"ユーザー(プレイヤー)データの取得に失敗しました : {error.GenerateErrorReport()}");
     }
     
-    public async UniTask UpdateUserDate()
+    public async UniTask UpdateUserData()
     {
         int index = 0;
         foreach (var data in _partyList)

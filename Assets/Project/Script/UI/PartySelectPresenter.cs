@@ -9,14 +9,14 @@ public class PartySelectPresenter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PartyManager.Instance.ObserveEveryValueChanged(x => PartyManager.Instance.PartyList)
-            .Subscribe(x =>
-                _partySelectView.SpriteChange(x[0].Icon, x[1].Icon, x[2].Icon));
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        for (int i = 0; i < 3; i++)
+        {
+            int n = i;
+            PartyManager.Instance.ObserveEveryValueChanged(x => PartyManager.Instance.PartyList[n])
+                .Subscribe(x =>
+                    _partySelectView.SpriteChange(PartyManager.Instance.PartyList[0].Icon,
+                        PartyManager.Instance.PartyList[1].Icon,
+                        PartyManager.Instance.PartyList[2].Icon));
+        }
     }
 }

@@ -25,14 +25,29 @@ public class PartyButtonSetter : MonoBehaviour
             en.GetComponent<SetPartyEmpty>().IndexSet(Partyindex,_gestrootObject);
             en.GetComponent<Image>().sprite = PartyManager.Instance.EmptyPartyData.Icon;
             _buttonList.Add(en);
-            foreach (var character in CharacterManager.Instance._getCharacters)
+        foreach (var character in CharacterManager.Instance._getCharacters)
         {
-            var obj = Instantiate(_partyButton, _gestrootObject.transform);
-            obj.GetComponent<SetParty>().IndexSet(Partyindex,_hostrootObject,_gestrootObject);
-            obj.GetComponent<Image>().sprite = CharacterManager.Instance._getCharacters[index].Icon;
-            obj.GetComponent<SetParty>().CharacterSet(character);
-            _buttonList.Add(obj);
-            index++;
+            if (character.Characternum == PartyManager.Instance.PartyList[0].Characternum)
+            {
+                index++;
+            }
+            else if (character.Characternum == PartyManager.Instance.PartyList[1].Characternum)
+            {
+                index++;
+            }
+            else if (character.Characternum == PartyManager.Instance.PartyList[2].Characternum)
+            {
+                index++;
+            }
+            else
+            {
+                var obj = Instantiate(_partyButton, _gestrootObject.transform);
+                obj.GetComponent<SetParty>().IndexSet(Partyindex,_hostrootObject,_gestrootObject);
+                obj.GetComponent<Image>().sprite = CharacterManager.Instance._getCharacters[index].Icon;
+                obj.GetComponent<SetParty>().CharacterSet(character);
+                _buttonList.Add(obj);
+                index++;
+            }
         }
     }
     
@@ -41,12 +56,33 @@ public class PartyButtonSetter : MonoBehaviour
         _hostrootObject.SetActive(true);
         foreach (var character in CharacterManager.Instance._getCharacters)
         {
-            var obj = Instantiate(_partyButton, _hostrootObject.transform);
-            obj.GetComponent<SetParty>().IndexSet(Partyindex,_hostrootObject,_gestrootObject);
-            obj.GetComponent<Image>().sprite = CharacterManager.Instance._getCharacters[index].Icon;
-            obj.GetComponent<SetParty>().CharacterSet(character);
-            _buttonList.Add(obj);
-            index++;
+            if (character.Characternum == PartyManager.Instance.PartyList[0].Characternum)
+            {
+                index++;
+            }
+            else if (character.Characternum == PartyManager.Instance.PartyList[1].Characternum)
+            {
+                index++;
+            }
+            else if (character.Characternum == PartyManager.Instance.PartyList[2].Characternum)
+            {
+                index++;
+            }
+            else
+            {
+                var obj = Instantiate(_partyButton, _hostrootObject.transform);
+                obj.GetComponent<SetParty>().IndexSet(Partyindex,_hostrootObject,_gestrootObject);
+                obj.GetComponent<Image>().sprite = CharacterManager.Instance._getCharacters[index].Icon;
+                obj.GetComponent<SetParty>().CharacterSet(character);
+                _buttonList.Add(obj);
+                index++;
+            }
+
+        }
+        if (_buttonList.Count == 0)
+        {
+            _hostrootObject.SetActive(false);
+            Debug.Log("メンバーがいないよ");
         }
     }
 

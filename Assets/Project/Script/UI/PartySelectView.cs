@@ -12,5 +12,6 @@ public class PartySelectView : MonoBehaviour
         _image[0].sprite = party1;
         _image[1].sprite = party2;
         _image[2].sprite = party3;
+        Debug.Log("(´・ω・｀)");
     }
 }

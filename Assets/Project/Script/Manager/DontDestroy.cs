@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 
@@ -7,6 +8,7 @@ public class DontDestroy : MonoBehaviour
 {
     private void Start()
     {
+        
         DontDestroyOnLoad(gameObject);
     }
 }
