@@ -19,5 +19,6 @@ public class SetPartyEmpty : MonoBehaviour
     {
         _gestGameObject.SetActive(false);
         PartyManager.Instance.PartyRemove(_index);
+        PartyUIUpdater.Instance.PartymemberUITrue();
     }
 }

@@ -13,7 +13,7 @@ public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBe
             {
                 Type t = typeof(T);
 
-                instance = (T)FindObjectOfType(t);
+                instance = FindObjectOfType(t) as T;
                 if (instance == null)
                 {
                     Debug.LogWarning($"{t}をアタッチしているオブジェクトがありません");

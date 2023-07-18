@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class PartyButtonSetter : MonoBehaviour
 {
+    
     [SerializeField] private GameObject _partyButton;
 
     [SerializeField] private GameObject _emptyButton;
@@ -19,6 +20,7 @@ public class PartyButtonSetter : MonoBehaviour
     private List<GameObject> _buttonList  = new List<GameObject>();
 
     public void GestCharacterSelectOn(int Partyindex){
+        PartyUIUpdater.Instance.PartymemberUIfalse();
         int index = 0;
         _gestrootObject.SetActive(true);
         var en = Instantiate(_emptyButton, _gestrootObject.transform);
@@ -52,6 +54,7 @@ public class PartyButtonSetter : MonoBehaviour
     }
     
     public void HostCharacterSelectOn(int Partyindex){
+        PartyUIUpdater.Instance.PartymemberUIfalse();
         int index = 0;
         _hostrootObject.SetActive(true);
         foreach (var character in CharacterManager.Instance._getCharacters)
@@ -81,6 +84,7 @@ public class PartyButtonSetter : MonoBehaviour
         }
         if (_buttonList.Count == 0)
         {
+            PartyUIUpdater.Instance.PartymemberUITrue();
             _hostrootObject.SetActive(false);
             Debug.Log("メンバーがいないよ");
         }

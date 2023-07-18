@@ -132,8 +132,8 @@ public class PartyManager : SingletonMonoBehaviour<PartyManager>
             else
             {
                 var Data =CharacterManager.Instance._getCharacters.Find(X => X.Characternum == getPartyData.Characternuml);
-                _partyList[index] = Data;
-                Debug.Log(getPartyData.Characternuml);
+                Debug.Log(Data.Characternum);
+                _partyList[index] = (IPartyFormationable)Data;
                 index++;
             }
         }

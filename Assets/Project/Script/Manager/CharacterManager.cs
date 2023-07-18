@@ -1,17 +1,13 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
 {
     public GetCharacterFile _getCharacterFile;
-    
-    //[SerializeField] private Image _image;
 
     public int CharacterID;
 
@@ -19,17 +15,9 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
     
     public CharacterDataAsset _characterDataAsset;
 
-    private Sprite Test;
-    
-    
+
     private void Start()
     {
-        // Test = _characterDataAsset.CharacterDatasList[1]._characterSprite;
-        //
-        // _image.sprite = Test;    
-        //
-        // Debug.Log(_characterDataAsset.CharacterDatasList[0]._status.Name);
-        
         //GetUserData();
         //UpdateUserDate();
     }
@@ -120,7 +108,6 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
     
     #endregion
 
-
     #region PrivateMethods
 
     private async UniTask GetCharactersSetr()
@@ -129,16 +116,7 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
         {
             var Data =_characterDataAsset.CharacterDatasList.Find(X => X._status.Name == getChatacterData.GetCharacterName);
 
-            var character = new Character(
-                                getChatacterData.CharacterID,
-                                Data._characterSprite,
-                                Data._charactericonSprite,
-                                Data._status.Name,
-                                getChatacterData.CharacterLevel,
-                                Data._status.MaxHP,
-                                Data._status.Atk,
-                                Data._status.Speed,
-                                Data._status.Lucky);
+            var character = new Character(getChatacterData,Data);
             
             _getCharacters.Add(character);
         }

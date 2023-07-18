@@ -7,7 +7,7 @@ public class SetParty : MonoBehaviour
     [SerializeField] private GameObject _hostList;
     [SerializeField] private GameObject _gestList;
     
-    private IPartyFormationable _character;
+    private Character _character;
 
     private int index;
 
@@ -26,31 +26,16 @@ public class SetParty : MonoBehaviour
     }
     public void Click()
     {
-        if (IsParty)
+        if (index == 0)
         {
-            if (index == 0)
-            {
-                _hostList.SetActive(false);
-            }
-            else
-            {
-                _gestList.SetActive(false);
-            }
-            PartyManager.Instance.PartyRemove(index);
-            IsParty = false;
+            _hostList.SetActive(false);
         }
-        else if(!IsParty)
+        else
         {
-            if (index == 0)
-            {
-                _hostList.SetActive(false);
-            }
-            else
-            {
-                _gestList.SetActive(false);
-            }
-            PartyManager.Instance.PartySet((Character)_character,index);
-            IsParty = true;
+            _gestList.SetActive(false);
         }
+        PartyManager.Instance.PartySet(_character, index);
+        IsParty = false;
+        PartyUIUpdater.Instance.PartymemberUITrue();
     }
 }
