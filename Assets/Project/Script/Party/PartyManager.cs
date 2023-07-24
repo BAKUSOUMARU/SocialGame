@@ -80,6 +80,7 @@ public class PartyManager : SingletonMonoBehaviour<PartyManager>
     
     public async UniTask UpdateUserData()
     {
+        _getPartyFile.input_PartyData.Clear();
         int index = 0;
         foreach (var data in _partyList)
         {

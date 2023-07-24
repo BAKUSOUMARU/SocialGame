@@ -20,6 +20,7 @@ public class PartyButtonSetter : MonoBehaviour
     private List<GameObject> _buttonList  = new List<GameObject>();
 
     public void GestCharacterSelectOn(int Partyindex){
+        _buttonList.Clear();
         PartyUIUpdater.Instance.PartymemberUIfalse();
         int index = 0;
         _gestrootObject.SetActive(true);
@@ -54,9 +55,9 @@ public class PartyButtonSetter : MonoBehaviour
     }
     
     public void HostCharacterSelectOn(int Partyindex){
+        _buttonList.Clear();
         PartyUIUpdater.Instance.PartymemberUIfalse();
         int index = 0;
-        _hostrootObject.SetActive(true);
         foreach (var character in CharacterManager.Instance._getCharacters)
         {
             if (character.Characternum == PartyManager.Instance.PartyList[0].Characternum)
@@ -87,6 +88,13 @@ public class PartyButtonSetter : MonoBehaviour
             PartyUIUpdater.Instance.PartymemberUITrue();
             _hostrootObject.SetActive(false);
             Debug.Log("メンバーがいないよ");
+            
+            Debug.Log( "Buttonリストの数"+ _buttonList.Count);
+        }
+        else
+        {
+            _hostrootObject.SetActive(true);
+            Debug.Log( "Buttonリストの数"+ _buttonList.Count);
         }
     }
 

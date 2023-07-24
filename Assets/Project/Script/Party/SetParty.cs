@@ -11,8 +11,6 @@ public class SetParty : MonoBehaviour
 
     private int index;
 
-    private bool IsParty = false;
-    
     public void CharacterSet(Character character)
     {
         _character = character;
@@ -35,7 +33,6 @@ public class SetParty : MonoBehaviour
             _gestList.SetActive(false);
         }
         PartyManager.Instance.PartySet(_character, index);
-        IsParty = false;
         PartyUIUpdater.Instance.PartymemberUITrue();
     }
 }
