@@ -4,10 +4,13 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 using PlayFab.EconomyModels;
+using TMPro;
 
 public class Gacha : MonoBehaviour
 {
 
+    [SerializeField] 
+    private TMP_Text _text;
     public void GachaGO()
     {
         var request = new PurchaseItemRequest
@@ -23,12 +26,14 @@ public class Gacha : MonoBehaviour
     }
     private void OnErrorUpdatingPlayerData(PlayFabError obj)
     {
-        Debug.LogWarning($"ガチャが引けませんでした"+ obj);
+        _text.text = "がチャ石が足りないよ";
+        //Debug.LogWarning($"ガチャが引けませんでした"+ obj);
     }
 
     private void OnSuccessUpdatingPlayerData(PurchaseItemResult obj)
     {
-        Debug.Log(obj.Items[1].DisplayName);
+		string getCharacter　= obj.Items[1].DisplayName;
+        Debug.Log(getCharacter);
         var data =CharacterManager.Instance._characterDataAsset.CharacterDatasList.Find(X => X._status.Name == obj.Items[1].DisplayName);
         var character = new Character(
             CharacterManager.Instance.CharacterID,
@@ -41,6 +46,7 @@ public class Gacha : MonoBehaviour
             data._status.Speed,
             data._status.Lucky);
         CharacterManager.Instance.AddGetCharacter(character);
+        _text.text = data._status.Name + "をゲットした";
         CharacterManager.Instance.UpdateUserDate();
     }
 }

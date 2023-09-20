@@ -110,13 +110,13 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
 
     #region PrivateMethods
 
-    private async UniTask GetCharactersSetr()
+    private async UniTask  GetCharactersSetr()
     {
         foreach (var getChatacterData in _getCharacterFile.input_File)
         {
-            var Data =_characterDataAsset.CharacterDatasList.Find(X => X._status.Name == getChatacterData.GetCharacterName);
+            var data =_characterDataAsset.CharacterDatasList.Find(x => x._status.Name == getChatacterData.GetCharacterName);
 
-            var character = new Character(getChatacterData,Data);
+            var character = new Character(getChatacterData,data);
             
             _getCharacters.Add(character);
         }
