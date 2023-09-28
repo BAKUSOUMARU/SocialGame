@@ -14,8 +14,12 @@ public class PartyButtonSetter : MonoBehaviour
     [SerializeField] private GameObject _emptyButton;
 
     [SerializeField] private GameObject _gestrootObject;
+
+    [SerializeField] private GameObject _gestButtonContent;
     
     [SerializeField] private GameObject _hostrootObject;
+
+    [SerializeField] private GameObject _hostButtonContent;
 
     private List<GameObject> _buttonList  = new List<GameObject>();
 
@@ -24,7 +28,7 @@ public class PartyButtonSetter : MonoBehaviour
         PartyUIUpdater.Instance.PartymemberUIfalse();
         int index = 0;
         _gestrootObject.SetActive(true);
-        var en = Instantiate(_emptyButton, _gestrootObject.transform);
+        var en = Instantiate(_emptyButton, _gestButtonContent.transform);
             en.GetComponent<SetPartyEmpty>().IndexSet(Partyindex,_gestrootObject);
             en.GetComponent<Image>().sprite = PartyManager.Instance.EmptyPartyData.Icon;
             _buttonList.Add(en);
@@ -44,7 +48,7 @@ public class PartyButtonSetter : MonoBehaviour
             }
             else
             {
-                var obj = Instantiate(_partyButton, _gestrootObject.transform);
+                var obj = Instantiate(_partyButton, _gestButtonContent.transform);
                 obj.GetComponent<SetParty>().IndexSet(Partyindex,_hostrootObject,_gestrootObject);
                 obj.GetComponent<Image>().sprite = CharacterManager.Instance._getCharacters[index].Icon;
                 obj.GetComponent<SetParty>().CharacterSet(character);
@@ -74,7 +78,7 @@ public class PartyButtonSetter : MonoBehaviour
             }
             else
             {
-                var obj = Instantiate(_partyButton, _hostrootObject.transform);
+                var obj = Instantiate(_partyButton, _hostButtonContent.transform);
                 obj.GetComponent<SetParty>().IndexSet(Partyindex,_hostrootObject,_gestrootObject);
                 obj.GetComponent<Image>().sprite = CharacterManager.Instance._getCharacters[index].Icon;
                 obj.GetComponent<SetParty>().CharacterSet(character);

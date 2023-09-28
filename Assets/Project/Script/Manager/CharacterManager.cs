@@ -114,7 +114,7 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
     {
         foreach (var getChatacterData in _getCharacterFile.input_File)
         {
-            var data =_characterDataAsset.CharacterDatasList.Find(x => x._status.Name == getChatacterData.GetCharacterName);
+            var data =_characterDataAsset.CharacterDatasList.Find(x => x._status.Englishname == getChatacterData.GetCharacterName);
 
             var character = new Character(getChatacterData,data);
             
@@ -128,7 +128,7 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
     public void AddGetCharacter(Character getCharacter)
     {
         _getCharacters.Add(getCharacter);
-        var data = new GetChatacter(CharacterID,getCharacter.Status.Name,getCharacter.Status.Level);
+        var data = new GetChatacter(CharacterID,getCharacter.Status.Englishname,getCharacter.Status.Level);
         _getCharacterFile.input_File.Add(data);
         CharacterID++;
     }

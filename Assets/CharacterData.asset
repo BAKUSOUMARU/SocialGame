@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterDatasList:
   - _status:
-      _name: Reimu
+      _englishname: Reimu
+      _japaneseNeme: "\u970A\u5922"
       _level: 1
       _maxHp: 100
       _atk: 20
@@ -23,7 +24,8 @@ MonoBehaviour:
     _characterSprite: {fileID: 210007217, guid: ec797dbe26763d046a18a708a08e51a5, type: 3}
     _charactericonSprite: {fileID: 1923894399, guid: ec797dbe26763d046a18a708a08e51a5, type: 3}
   - _status:
-      _name: Marisa
+      _englishname: Marisa
+      _japaneseNeme: "\u9B54\u7406\u6C99"
       _level: 1
       _maxHp: 80
       _atk: 40
@@ -32,7 +34,8 @@ MonoBehaviour:
     _characterSprite: {fileID: 1618010190, guid: c385d2427ccca1a4e8e5ed92988e8469, type: 3}
     _charactericonSprite: {fileID: -1696288966, guid: c385d2427ccca1a4e8e5ed92988e8469, type: 3}
   - _status:
-      _name: Youmu
+      _englishname: Youmu
+      _japaneseNeme: "\u5996\u5922"
       _level: 1
       _maxHp: 80
       _atk: 40

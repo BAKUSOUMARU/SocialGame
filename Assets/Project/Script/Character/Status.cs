@@ -4,9 +4,13 @@ using UnityEngine.Serialization;
 [System.Serializable]
 public class Status
 {
-    [SerializeField] private string _name;
-    public string Name => _name;
+    [SerializeField] private string _englishname;
+    public string Englishname => _englishname;
 
+    [SerializeField] private string _japaneseNeme;
+
+    public string JapaneseName => _japaneseNeme;
+    
     [SerializeField] private int _level;
     public int Level => _level;
     
@@ -34,9 +38,10 @@ public class Status
         return Hp <= 0;
     }
 
-    public void Set(int level, int maxhp, int atk, int speed, int lucky, string name = "Enemy")
+    public void Set(int level, int maxhp, int atk, int speed, int lucky, string englishname,string japansename)
     {
-        _name = name;
+        _englishname = englishname;
+        _japaneseNeme = japansename;
         _level = level;
         _maxHp = maxhp;
         _atk = atk;

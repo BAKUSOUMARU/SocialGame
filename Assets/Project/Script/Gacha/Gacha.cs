@@ -34,19 +34,20 @@ public class Gacha : MonoBehaviour
     {
 		string getCharacter　= obj.Items[1].DisplayName;
         Debug.Log(getCharacter);
-        var data =CharacterManager.Instance._characterDataAsset.CharacterDatasList.Find(X => X._status.Name == obj.Items[1].DisplayName);
+        var data =CharacterManager.Instance._characterDataAsset.CharacterDatasList.Find(X => X._status.Englishname == obj.Items[1].DisplayName);
         var character = new Character(
             CharacterManager.Instance.CharacterID,
             data._characterSprite,
             data._charactericonSprite,
-            data._status.Name,
+            data._status.Englishname,
+            data._status.JapaneseName,
             data._status.Level,
             data._status.MaxHP,
             data._status.Atk,
             data._status.Speed,
             data._status.Lucky);
         CharacterManager.Instance.AddGetCharacter(character);
-        _text.text = data._status.Name + "をゲットした";
+        _text.text = data._status.JapaneseName + "をゲットした";
         CharacterManager.Instance.UpdateUserDate();
     }
 }
