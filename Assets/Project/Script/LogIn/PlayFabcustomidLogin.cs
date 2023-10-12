@@ -8,24 +8,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class PlayFabcustomidLogin : MonoBehaviour
+public static class PlayFabcustomidLogin
 {
-    [SerializeField] 
-    private GameObject _loginUI;
-    
-    [SerializeField]
-    private GameObject _accountnameSetUI;
 
-    [SerializeField] 
-    private TMP_Text _text;
+    public static Action FarstLoginTure;
 
-    [SerializeField] 
-    private string sceneChangeName ="HomeScene";
+    public static Action LoginTure;
     
-    private string _id;
-    bool _isAccountCreate;
+    public static Action LoginFalse;
     
-    public async void Set()
+    private static string _id;
+    static bool _isAccountCreate;
+    
+    public static async UniTask Set()
     {
         if (TestForNullOrEmpty(SaveDataManager.Instance.userData.id))
         {
@@ -39,10 +34,9 @@ public class PlayFabcustomidLogin : MonoBehaviour
             _id = SaveDataManager.Instance.userData.id;
             await CustomIDLogin();
         }
-        
     }
 
-    async UniTask CustomIDLogin()
+    static async UniTask CustomIDLogin()
     {
         PlayFabClientAPI.LoginWithCustomID(
             new LoginWithCustomIDRequest {
@@ -54,23 +48,21 @@ public class PlayFabcustomidLogin : MonoBehaviour
                 await SaveDataManager.Instance.SaveDataAsync();
                 if (_isAccountCreate)
                 {
-                    UiUP();
+                    FarstLoginTure.Invoke();
                     return;
                 }
-
-                _text.text = "すでにアカウントが作られているためログインが完了しました";
                 await CharacterManager.Instance.GetUserData();
                 await PartyManager.Instance.GetUserData();
-                SceneChanger.ChangeScene(sceneChangeName);
+                LoginTure.Invoke();
             },
             error => {
                 // 失敗時の処理
-                _text.text = "アカウント作成に失敗しました";
+                LoginFalse.Invoke();
             }
         );
     }
 
-    public async UniTask CheckAccountExistence(string customId)
+    public static async UniTask CheckAccountExistence(string customId)
     {
         var request = new LoginWithCustomIDRequest
         {
@@ -81,21 +73,21 @@ public class PlayFabcustomidLogin : MonoBehaviour
     }
 
     
-    private async void OnAccountExistenceCheckSuccess(LoginResult result)
+    private static async void OnAccountExistenceCheckSuccess(LoginResult result)
     {
         //アカウントが存在する場合の処理を書く
         _id = CreateID().ToString();
         await CheckAccountExistence(_id);
 
     }
-    private async void OnAccountExistenceCheckFailure(PlayFabError error)
+    private static async void OnAccountExistenceCheckFailure(PlayFabError error)
     {
         SaveDataManager.Instance.userData.id = _id;
         await CustomIDLogin();
         Debug.Log("Check完了");
     }
-    
-     int CreateID()
+
+    static int CreateID()
     {
         int min = 100000000;
         int max = 999999999;
@@ -103,25 +95,21 @@ public class PlayFabcustomidLogin : MonoBehaviour
 
         return randomNumber;
     }
-     
-     bool TestForNullOrEmpty(string s)
+
+     static bool TestForNullOrEmpty(string s)
      {
          bool result;
          result = s == null || s == string.Empty;
          return result;
      }
 
-     void UiUP()
-     {
-         _accountnameSetUI.SetActive(true);
-         _loginUI.gameObject.SetActive(false);
-     }
+   
      
      /// <summary>
      /// メアドとパスワードでログインした場合のcustomIDをセーブデータmanagerに入れる関数
      /// (saveは別途してください)
      /// </summary>
-     private void GetCustomID()
+     private static void GetCustomID()
      {
          var request = new GetAccountInfoRequest();
 
@@ -129,14 +117,14 @@ public class PlayFabcustomidLogin : MonoBehaviour
      }
 
      // 取得成功時のコールバックメソッド
-     private void OnGetAccountInfoSuccess(GetAccountInfoResult result)
+     private static void OnGetAccountInfoSuccess(GetAccountInfoResult result)
      {
          SaveDataManager.Instance.userData.id = result.AccountInfo.CustomIdInfo.CustomId;
          SaveDataManager.Instance.userData.accountName = result.AccountInfo.TitleInfo.DisplayName;
      }
 
      // 取得失敗時のコールバックメソッド
-     private void OnGetAccountInfoFailure(PlayFabError error)
+     private static void OnGetAccountInfoFailure(PlayFabError error)
      {
          Debug.LogError("Failed to get custom ID: " + error.ErrorMessage);
      }

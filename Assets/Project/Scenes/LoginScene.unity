@@ -1589,7 +1589,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 370786479}
-  - component: {fileID: 370786478}
+  - component: {fileID: 370786480}
   m_Layer: 0
   m_Name: GameObject (1)
   m_TagString: Untagged
@@ -1597,22 +1597,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &370786478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 370786477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3efdeec47f717ec469fe52a16c92c7be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _loginUI: {fileID: 1428026053}
-  _accountnameSetUI: {fileID: 779444328}
-  _text: {fileID: 1059447207}
-  sceneChangeName: HomeScene
 --- !u!4 &370786479
 Transform:
   m_ObjectHideFlags: 0
@@ -1628,6 +1612,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &370786480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370786477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51277b43185f42b196e9a1d43a75371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _loginUI: {fileID: 1428026053}
+  _accountnameSetUI: {fileID: 779444328}
+  _text: {fileID: 1059447207}
+  sceneChangeName: HomeScene
 --- !u!1 &414590110
 GameObject:
   m_ObjectHideFlags: 0
@@ -4949,9 +4949,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 370786478}
-        m_TargetAssemblyTypeName: PlayFabcustomidLogin, Assembly-CSharp
-        m_MethodName: Set
+      - m_Target: {fileID: 370786480}
+        m_TargetAssemblyTypeName: PlaFabFastLogin, Assembly-CSharp
+        m_MethodName: Login
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
