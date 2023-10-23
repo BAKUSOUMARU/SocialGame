@@ -13,4 +13,9 @@ public class HomeUIView : MonoBehaviour
     {
         _userNameText.text = usetname;
     }
+
+    public void ChangeVirtualCurrency(int value)
+    {
+        Debug.Log("魔法石所持数" + value);
+    }
 }

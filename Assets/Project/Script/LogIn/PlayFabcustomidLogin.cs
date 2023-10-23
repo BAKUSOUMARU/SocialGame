@@ -2,10 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using PlayFab;
 using PlayFab.ClientModels;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public static class PlayFabcustomidLogin
@@ -32,34 +29,40 @@ public static class PlayFabcustomidLogin
         {
             _isAccountCreate = false;
             _id = SaveDataManager.Instance.userData.id;
-            await CustomIDLogin();
+            await CustomIDLoginAsync();
         }
     }
 
-    static async UniTask CustomIDLogin()
+    static async UniTask CustomIDLoginAsync()
     {
         PlayFabClientAPI.LoginWithCustomID(
             new LoginWithCustomIDRequest {
                 CustomId = _id, 
                 CreateAccount = _isAccountCreate, 
-            }, async result => {
-                Debug.Log("ログイン成功");
-                SaveDataManager.Instance.userData.playFabId = result.PlayFabId;
-                await SaveDataManager.Instance.SaveDataAsync();
-                if (_isAccountCreate)
-                {
-                    FarstLoginTure.Invoke();
-                    return;
-                }
-                await CharacterManager.Instance.GetUserData();
-                await PartyManager.Instance.GetUserData();
-                LoginTure.Invoke();
+            }, result => {
+                ResultCallback(result).Forget();
             },
             error => {
                 // 失敗時の処理
                 LoginFalse.Invoke();
             }
         );
+    }
+
+    private static async UniTaskVoid ResultCallback(LoginResult result)
+    {
+        Debug.Log("ログイン成功");
+        SaveDataManager.Instance.userData.playFabId = result.PlayFabId;
+        await SaveDataManager.Instance.SaveDataAsync();
+        if (_isAccountCreate)
+        {
+            FarstLoginTure.Invoke();
+            return;
+        }
+
+        await (CharacterManager.Instance.GetUserData(), PartyManager.Instance.GetUserData());
+
+        LoginTure.Invoke();
     }
 
     public static async UniTask CheckAccountExistence(string customId)
@@ -83,7 +86,7 @@ public static class PlayFabcustomidLogin
     private static async void OnAccountExistenceCheckFailure(PlayFabError error)
     {
         SaveDataManager.Instance.userData.id = _id;
-        await CustomIDLogin();
+        await CustomIDLoginAsync();
         Debug.Log("Check完了");
     }
 
@@ -107,7 +110,6 @@ public static class PlayFabcustomidLogin
      
      /// <summary>
      /// メアドとパスワードでログインした場合のcustomIDをセーブデータmanagerに入れる関数
-     /// (saveは別途してください)
      /// </summary>
      private static void GetCustomID()
      {

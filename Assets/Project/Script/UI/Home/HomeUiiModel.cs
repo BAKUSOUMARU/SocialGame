@@ -1,21 +1,25 @@
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using PlayFab;
 using PlayFab.ClientModels;
 using TMPro;
 using UnityEngine;
 
-public class HomeUiSet : MonoBehaviour
+public class HomeUiiModel : MonoBehaviour
 {
-    [SerializeField] private TMP_Text userNameText;
-
     private string _userName;
     
     public string UserName => _userName;
+
+    private  int _virtualCurrency;
+
+    public int VirtualCurrency => _virtualCurrency;
     
     // Start is called before the first frame update
      void Start()
     {
          GetDisplayName().Forget();
+         GetvirtualCurrency().Forget();
     }
 
     async UniTask GetDisplayName()
@@ -29,11 +33,24 @@ public class HomeUiSet : MonoBehaviour
             },
             result => {
                 _userName = result.PlayerProfile.DisplayName;
-                userNameText.text = _userName;
             },
             error => {
                 Debug.LogError(error.GenerateErrorReport());
             }
         ); 
     }
+
+    async UniTask GetvirtualCurrency()
+    {
+        PlayFabClientAPI.GetUserInventory(new GetUserInventoryRequest()
+            {
+            }
+            , (result) =>
+            {
+                result.VirtualCurrency.TryGetValue("MS", out int value);
+                _virtualCurrency = value;
+            },
+            (error => { Debug.Log(error.GenerateErrorReport()); }));
+    }
+    
 }
