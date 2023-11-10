@@ -19,6 +19,8 @@ public class PlaFabFastLogin : MonoBehaviour
     [SerializeField] 
     private string sceneChangeName ="HomeScene";
 
+    private bool isLogin = false;
+
     private void Awake()
     {
         PlayFabcustomidLogin.FarstLoginTure += AccountSetUP;
@@ -35,6 +37,8 @@ public class PlaFabFastLogin : MonoBehaviour
 
     public async void Login()
     {
+        if (isLogin)return;
+        isLogin = true;
         await PlayFabcustomidLogin.Set();
     }
 
@@ -42,15 +46,18 @@ public class PlaFabFastLogin : MonoBehaviour
     {
         _loginUI.SetActive(false);
         _accountnameSetUI.SetActive(true);
+        isLogin = false;
     }
 
     void LoginFalse()
     {
         _text.text = "ログインに失敗しました";
+        isLogin = false;
     }
 
     void rodeseen()
     {
         SceneChanger.ChangeScene(sceneChangeName);
+        isLogin = false;
     }
 }

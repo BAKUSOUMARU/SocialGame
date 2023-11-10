@@ -36,7 +36,6 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
         var request = new GetUserDataRequest();
 
         //ユーザー(プレイヤー)データの取得
-        await UniTask.WhenAll();
         PlayFabClientAPI.GetUserData(request, OnSuccessGettingPlayerData, OnErrorGettingPlayerData);
         await UniTask.WaitUntil(() => _getData, cancellationToken: this.GetCancellationTokenOnDestroy());
         Debug.Log($"プレイヤー(ユーザー)データの取得完了");

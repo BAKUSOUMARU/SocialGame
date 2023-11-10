@@ -49,6 +49,7 @@ public class HomeUiiModel : MonoBehaviour
             {
                 result.VirtualCurrency.TryGetValue("MS", out int value);
                 _virtualCurrency = value;
+                
             },
             (error => { Debug.Log(error.GenerateErrorReport()); }));
     }
